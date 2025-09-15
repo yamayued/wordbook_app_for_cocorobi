@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CoCoRoBi 社内ルール学習帳</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1>CoCoRoBi 社内ルール &amp; AI 活用単語帳</h1>
+      <p class="lead">弊社で AI を扱う際のルールやコツをまとめた単語帳です。覚えた内容はテストモードで確認しましょう。</p>
+      <div class="progress-panel" aria-live="polite">
+        <span id="progress-count">0 / 0</span>
+        <span class="progress-label">覚えたカード</span>
+        <progress id="progress-bar" value="0" max="0" aria-hidden="true"></progress>
+      </div>
+      <nav class="filters" aria-label="カテゴリフィルタ">
+        <button class="filter-btn active" data-filter="all">すべて</button>
+        <button class="filter-btn" data-filter="ルール">ルール</button>
+        <button class="filter-btn" data-filter="コツ">コツ</button>
+        <button class="filter-btn" data-filter="チェックリスト">チェックリスト</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="wordbook" aria-labelledby="wordbook-title">
+      <div class="section-header">
+        <h2 id="wordbook-title">単語帳</h2>
+        <p>カードをクリックして詳細を確認し、覚えたら「習得済みにする」を押してください。</p>
+      </div>
+      <div id="card-list" class="card-list" aria-live="polite"></div>
+    </section>
+
+    <section id="flashcards" aria-labelledby="flashcards-title">
+      <div class="section-header">
+        <h2 id="flashcards-title">フラッシュカードで復習</h2>
+        <p>未習得のカードを中心に一枚ずつめくって理解度を確認しましょう。</p>
+      </div>
+      <div class="flashcard-controls">
+        <label class="toggle">
+          <input type="checkbox" id="flashcard-unlearned" checked />
+          <span>未習得のみ出題</span>
+        </label>
+        <button id="flashcard-reset" class="secondary">カードをリセット</button>
+      </div>
+      <div class="flashcard" id="flashcard" aria-live="polite">
+        <div class="flashcard-content">
+          <div class="flashcard-face flashcard-front">
+            <p id="flashcard-count" class="flashcard-count"></p>
+            <p class="flashcard-label">キーワード</p>
+            <h3 id="flashcard-term"></h3>
+            <p id="flashcard-summary" class="flashcard-summary"></p>
+          </div>
+          <div class="flashcard-face flashcard-back" aria-hidden="true">
+            <p class="flashcard-label">覚えておきたいポイント</p>
+            <p id="flashcard-detail"></p>
+          </div>
+        </div>
+      </div>
+      <div class="flashcard-actions">
+        <button id="flashcard-prev" class="secondary" aria-label="前のカード">前へ</button>
+        <button id="flashcard-flip" aria-label="カードを反転">答えを見る</button>
+        <button id="flashcard-next" class="secondary" aria-label="次のカード">次へ</button>
+        <button id="flashcard-learned" class="success" aria-label="習得済みにする">習得済みにする</button>
+      </div>
+    </section>
+
+    <section id="quiz" aria-labelledby="quiz-title">
+      <div class="section-header">
+        <h2 id="quiz-title">理解度チェックテスト</h2>
+        <p>ランダムに出題される 5 問に挑戦し、理解度を確認しましょう。</p>
+      </div>
+      <div class="quiz-panel">
+        <div class="quiz-setup" id="quiz-setup">
+          <label class="number-input">
+            <span>問題数</span>
+            <input type="number" id="quiz-count" min="3" max="10" value="5" />
+          </label>
+          <label class="toggle">
+            <input type="checkbox" id="quiz-unlearned" />
+            <span>未習得カードのみ出題する</span>
+          </label>
+          <p id="quiz-setup-message" class="setup-message" role="status" aria-live="polite"></p>
+          <button id="start-quiz">テストを開始</button>
+        </div>
+        <div class="quiz-body hidden" id="quiz-body" aria-live="polite">
+          <div class="quiz-status">
+            <span id="quiz-progress">1 / 5</span>
+            <span id="quiz-score">正解: 0</span>
+          </div>
+          <h3 id="quiz-question" class="quiz-question"></h3>
+          <ul id="quiz-options" class="quiz-options" role="list"></ul>
+          <p id="quiz-feedback" class="quiz-feedback" role="status"></p>
+          <div class="quiz-actions">
+            <button id="quiz-next" class="secondary">次の問題へ</button>
+            <button id="quiz-restart" class="secondary">テストをやり直す</button>
+          </div>
+        </div>
+        <div class="quiz-result hidden" id="quiz-result" aria-live="polite">
+          <h3>お疲れさまでした！</h3>
+          <p id="quiz-result-message"></p>
+          <button id="quiz-restart-final">もう一度挑戦する</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2024 CoCoRoBi. 学習内容はブラウザに保存されます。</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
