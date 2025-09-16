@@ -19,13 +19,20 @@ python3 -m http.server 8000 --directory docs
 
 ## テストの実行
 
-静的ファイルの主要セクションやデータ構造が維持されているかを確認する簡易テストを用意しています。
+E2E を含むテストを実行するには、依存関係をインストールした上で `pytest` を利用します。
 
 ```bash
-python -m unittest discover -s tests
+# 依存関係のインストール
+pip install -r requirements.txt
+
+# Playwright で使用する Chromium を取得
+python -m playwright install chromium
+
+# 静的コンテンツ検証 + ブラウザ E2E テスト
+pytest
 ```
 
-`docs/index.html` に必須セクションが存在するか、`docs/script.js` に十分なカードデータが定義されているかなどをチェックします。
+`pytest` は `tests/test_static_content.py` にある静的コンテンツの回帰テストと、`tests/e2e/` 以下のブラウザ操作による E2E テストをまとめて実行します。静的チェックのみを確認したい場合は従来通り `python -m unittest discover -s tests` でも実行できます。
 
 ## GitHub Pages で公開する
 
