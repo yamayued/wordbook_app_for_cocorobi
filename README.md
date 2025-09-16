@@ -17,6 +17,16 @@ python3 -m http.server 8000 --directory docs
 
 ブラウザで `http://localhost:8000` にアクセスすると画面を確認できます。
 
+## テストの実行
+
+静的ファイルの主要セクションやデータ構造が維持されているかを確認する簡易テストを用意しています。
+
+```bash
+python -m unittest discover -s tests
+```
+
+`docs/index.html` に必須セクションが存在するか、`docs/script.js` に十分なカードデータが定義されているかなどをチェックします。
+
 ## GitHub Pages で公開する
 
 このリポジトリには、`docs/` の内容を GitHub Pages に公開するための GitHub Actions ワークフロー (`.github/workflows/deploy.yml`) を用意しています。公開するには以下を実施してください。
